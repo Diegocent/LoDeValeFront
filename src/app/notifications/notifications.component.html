@@ -1,0 +1,99 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="header">
+                          <!-- desde aqui se edita-->
+                        <h3 class="title">Nuevo Producto</h3>
+                                    
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Codigo de Barras</label>
+                                    <input type="string" class="form-control" placeholder="" [(ngModel)]="codigo_barras">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Nombre del Producto</label>
+                                    <input type="string" class="form-control" placeholder="" [(ngModel)]="nombre_producto">
+                                </div>
+                            </div>
+                        </div>
+                       <!-- fin de edicion -->
+                    </div>
+                    <div class="content table-responsive table-full-width">
+                        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 table table-hover table-striped">         
+                            <ng-container matColumnDef="cantidad">
+                              <th mat-header-cell *matHeaderCellDef> cantidad </th>
+                              <td mat-cell *matCellDef="let element"> {{element.cantidad}} </td>
+                            </ng-container>
+                          
+                            <ng-container matColumnDef="nombre_producto">
+                              <th mat-header-cell *matHeaderCellDef> nombre </th>
+                              <td mat-cell *matCellDef="let element"> <input type="text" class="form-control" placeholder="nombre" [(ngModel)]="element.nombre" [disabled]="consulta"></td>
+                            </ng-container>
+          
+                            <ng-container matColumnDef="precio_venta">
+                              <th mat-header-cell *matHeaderCellDef> precio_venta </th>
+                              <td mat-cell *matCellDef="let element"> <input type="number" class="form-control" placeholder="precio_venta" [(ngModel)]="element.precio_venta" [disabled]="consulta" (change)="cargarValor($event,element)"></td>
+                            </ng-container>
+                          
+                            <ng-container matColumnDef="codigo_barras">
+                              <th mat-header-cell *matHeaderCellDef> codigo_barras </th>
+                              <td mat-cell *matCellDef="let element"> <input type="text" class="form-control" placeholder="codigo_barras" [(ngModel)]="element.codigo_barras" [disabled]="consulta" (change)="cargarValor($event,element)"></td>
+                            </ng-container>
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        </table>
+                        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Selecciona la pagina de los productos">  </mat-paginator>
+                  </div>
+                <div class="content">
+                    <!-- <br />
+                    <br /> -->
+                    <!-- desde aqui no se edita-->
+                        <div class="places-buttons">
+                                <div class="row">
+                                            <div class="col-md-3">
+                                            <button
+                                                class="btn btn-default btn-block"
+                                                (click)="agregarNuevoProducto()"
+                                            >
+                                                Agregar Productos
+                                            </button>
+                                            </div>
+                                            <div *ngIf="consulta" class="col-md-3">
+                                                <button
+                                                    class="btn btn-default btn-block btn-success"
+                                                    (click)="cambiarValor()"
+                                                >
+                                                    Modificar Productos
+                                                </button>
+                                                </div>
+                                            <div *ngIf="!consulta" class="col-md-3">
+                                                <button
+                                                        class="btn btn-default btn-block btn-danger"
+                                                        (click)="cancelar()"
+                                                    >
+                                                        Cancelar
+                                                </button>
+                                            </div>
+                                            <div *ngIf="!consulta" class="col-md-3 ">
+                                                <button
+                                                        class="btn btn-default btn-block btn-primary"
+                                                        (click)="actualizarProducto()"
+                                                    >
+                                                        Guardar Cambios
+                                                </button>
+                                            </div>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>

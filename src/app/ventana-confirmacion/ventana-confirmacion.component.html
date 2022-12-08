@@ -1,0 +1,11 @@
+<div mat-dialog-content><h1>Ventana de confirmacion</h1>
+    <div class="content">
+        <p>Esta seguro de que desea eliminar  {{mensaje}}</p>
+    </div>
+
+</div>
+    <div mat-dialog-actions>
+        <button mat-button type="submit" class="btn btn-info btn-fill pull-right" (click)='onClickNO()'>No</button>
+        <button mat-button type="submit" class="btn btn-danger btn-fill pull-right" (click)='clickSi()'>Si</button>
+        
+    </div>

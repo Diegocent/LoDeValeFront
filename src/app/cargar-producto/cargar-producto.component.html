@@ -1,0 +1,35 @@
+<div mat-dialog-content><h1> Producto Nuevo</h1>
+    <div class="content">
+        <form>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Nombre del Producto</label>
+                        <input type="text" class="form-control" placeholder="Nombre del producto" [(ngModel)]="nombre" >
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Precio de Venta</label>
+                        <input type="number" class="form-control" placeholder="Precio de venta" [(ngModel)]="precio_venta">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Codigo de Barras</label>
+                        <input type="text" class="form-control" placeholder="Codigo" [(ngModel)]="codigo_barras">
+                    </div>
+                </div>
+            </div>
+
+          
+            <div class="clearfix"></div>
+        </form>
+    </div>
+
+</div>
+    <div mat-dialog-actions>
+        <button mat-button type="submit" class="btn btn-info btn-fill pull-right btn-danger" (click)='onClickNO()'>Cancelar</button>
+        <button mat-button type="submit" class="btn btn-info btn-fill pull-right" (click)='guardarProducto()'>Guardar</button>
+        
+    </div>

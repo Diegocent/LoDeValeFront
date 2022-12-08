@@ -1,0 +1,90 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="header">
+                        <h4 class="title">Nuevo Producto</h4>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label>Ruc</label>
+                                    <input type="text" class="form-control" placeholder="Ruc del proveedor"  [(ngModel)]="ruc">
+                                </div>
+                            </div> 
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Nombre del Proveedor</label>
+                                    <input type="text" class="form-control" placeholder="Nombre del Proveedor"  [(ngModel)]="proveedor" (change)="buscarProveedor($event)"> 
+                                </div>
+                            </div>
+                                <div class="col-md-2">
+                                    <p class="category"></p>
+                                    <button style='margin-top:15%' type="submit" class="btn btn-info btn-fill pull-right" (click)="crearProveedor()">Nuevo Proveedor</button>                               
+                                </div>
+                            </div>
+
+                    </div>
+
+
+                    <div class="content table-responsive table-full-width">
+                        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 table table-hover demo-table">         
+                            <ng-container matColumnDef="ruc">
+                              <th mat-header-cell *matHeaderCellDef> ruc </th>
+                              <td mat-cell *matCellDef="let element"> {{element.ruc}} </td>
+                            </ng-container>
+                          
+                            <ng-container matColumnDef="empresa">
+                              <th mat-header-cell *matHeaderCellDef> empresa </th>
+                              <td mat-cell *matCellDef="let element"> {{element.empresa}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="accion">
+                                <th mat-header-cell *matHeaderCellDef><span style="margin-left:60px">Acciones</span></th>
+                                <td mat-cell *matCellDef="let element; let i = index">
+                                    <button mat-raised-button color="accent" (click)="modificarProveedor(element)">Modificar</button>
+                                    <button mat-raised-button color="warn" style="margin-left: 10px;" (click)="eliminarProveedor(element, element.id)">Eliminar</button>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="compra">
+                                <th mat-header-cell *matHeaderCellDef><span style="margin-left:60px">Compra</span></th>
+                                <td mat-cell *matCellDef="let element; let i = index">
+                                    <button mat-raised-button (click)="cargarCompra(element)">Cargar</button>
+                                </td>
+                            </ng-container>
+
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        </table>
+                        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Selecciona la pagina de los productos">  </mat-paginator>
+                    </div>
+                </div>
+                
+                
+            </div>
+            <!-- <div class="col-md-12">
+                <div class="card card-plain">
+                    <div class="header">
+                        <h4 class="title">Table on Plain Background</h4>
+                        <p class="category">Here is a subtitle for this table</p>
+                    </div>
+                    <div class="content table-responsive table-full-width">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th *ngFor="let cell of tableData2.headerRow">{{ cell }}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let row of tableData2.dataRows">
+                                    <td *ngFor="let cell of row">{{cell}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div> -->
+        </div>
+    </div>
+    </div>
+</div>

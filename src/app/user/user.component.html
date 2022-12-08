@@ -1,0 +1,41 @@
+<div class="header">
+    <h4 class="title">Crear cliente</h4>
+</div>
+<div class="content">
+    <form>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Nombre</label>
+                    <input type="text" class="form-control" name="nombre" #text1 placeholder="Nombre" [(ngModel)]="nombre" (change)="cambiar($event,text2)">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Apellido</label>
+                    <input type="text" class="form-control" name="apellido" #text2 placeholder="Apellido" [(ngModel)]="apellido" (change)="cambiar($event,text3)">
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Direccion</label>
+                    <input type="text" class="form-control" name="direccion" #text3 placeholder="Direccion" [(ngModel)]="direccion" (change)="cambiar($event,text4)">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>CI o RUC</label>
+                    <input type="text" class="form-control" name="ci" #text4 placeholder="CI o RUC" [(ngModel)]="documento" (change)="cambiar($event,text1)">
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div mat-dialog-actions>
+    <button mat-button type="submit" class="btn btn-danger btn-fill pull-right" (click)='onClickNO()'>Cancelar</button>
+    <button mat-button type="submit" class="btn btn-success btn-fill pull-right" (click)='cambiarvalor()'>Agregar cliente</button>
+    
+</div>

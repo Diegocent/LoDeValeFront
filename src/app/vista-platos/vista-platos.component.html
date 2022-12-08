@@ -1,0 +1,36 @@
+<div mat-dialog-content>
+    <div class="content">
+        <form>
+            <div class="row">
+                
+                <div>
+                    <span class="form-label"> Tipo de plato</span><br/>
+                    <mat-radio-group id="check" name="opciones" [(ngModel)]="seleccionado">
+                        <mat-radio-button *ngFor="let op of productos" name="opciones" [value]="op"  style="margin: 10px">
+                          {{op.nombre}}
+                        </mat-radio-button>
+                      </mat-radio-group>
+                </div>
+                <form>
+                    <div class="form-group">
+                        <label>Peso</label>
+                        <input type="number" name="elemento1" #dato1 style='-moz-appearance:textfield;' class="form-control" placeholder="Peso" [(ngModel)]="peso" (change)="calcularCosto($event)">
+                    </div>
+                    <div class="form-group">
+                        <label>Total</label>
+                        <input type="number" name="elemento2" #dato2 style='-moz-appearance:textfield;' class="form-control" placeholder="Total" [(ngModel)]="total" readonly>
+                    </div>
+                </form>
+            </div>
+
+          
+            <div class="clearfix"></div>
+        </form>
+    </div>
+
+</div>
+    <div mat-dialog-actions>
+        <button mat-button type="submit" class="btn btn-info btn-fill pull-right btn-danger" (click)='onClickNO()'>Cancelar</button>
+        <button mat-button type="submit" class="btn btn-info btn-fill pull-right" (click)='guardarPlato()'>Guardar</button>
+        
+    </div>

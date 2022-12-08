@@ -1,0 +1,76 @@
+<div class="main-content">
+    <div class="container-fluid">
+
+        <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="header">
+                        <h3 class="title">Reporte</h3>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Fecha desde</label>
+                                    <input type="date" style='-moz-appearance:textfield;' class="form-control" placeholder="" [(ngModel)]="fecha_inicio">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Fecha hasta</label>
+                                    <input type="date" style='-moz-appearance:textfield;' class="form-control" placeholder="" [(ngModel)]="fecha_fin">
+                                </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-info btn-fill pull-right" (click)="filtrar()">Filtrar</button>
+                            </div>
+                    </div>
+                        </div>
+                    <div class="content table-responsive table-full-width">
+                        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 table table-hover table-striped">         
+                            <ng-container matColumnDef="fecha">
+                              <th mat-header-cell *matHeaderCellDef> fecha </th>
+                              <td mat-cell *matCellDef="let element"> {{element.fecha}} </td>
+                            </ng-container>
+                          
+                            <ng-container matColumnDef="monto">
+                              <th mat-header-cell *matHeaderCellDef> monto </th>
+                              <td mat-cell *matCellDef="let element"> {{element.monto}} </td>
+                            </ng-container>
+          
+                            <ng-container matColumnDef="usuario">
+                              <th mat-header-cell *matHeaderCellDef> Cajero </th>
+                              <td mat-cell *matCellDef="let element"> {{element.usuario.nombre}}</td>
+                            </ng-container>
+                          
+                            <ng-container matColumnDef="cliente">
+                              <th mat-header-cell *matHeaderCellDef> cliente </th>
+                              <td mat-cell *matCellDef="let element"> {{element.cliente.nombre}} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="detalle">
+                                <th mat-header-cell *matHeaderCellDef><span style="margin-left:60px">Detalle</span></th>
+                                <td mat-cell *matCellDef="let element; let i = index">
+                                    <button mat-raised-button (click)="verDetalle(element)">Ver Detalle</button>
+                                </td>
+                            </ng-container>
+
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        </table>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Total en la fecha seleccionada</label>
+                        <input type="number" style='-moz-appearance:textfield;' class="form-control" placeholder="" [(ngModel)]="total" readonly>
+                    </div>
+            </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</div>

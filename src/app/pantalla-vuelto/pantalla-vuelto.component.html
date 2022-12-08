@@ -1,0 +1,30 @@
+<div mat-dialog-content><h1> Ventana Vuelto</h1>
+    <div class="content">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>Total</label>
+                    <input type="number" name="total" class="form-control" placeholder="Total a pagar" [(ngModel)]="total" readonly>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>Efectivo</label>
+                    <input type="number" name="efectivo" class="form-control" placeholder="Efectivo" [(ngModel)]="detalle.efectivo" (change)="calcularVuelto($event)" autofocus>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>Vuelto</label>
+                    <input type="number" style='-moz-appearance:textfield;' name='vuelto' class="form-control" placeholder="Vuelto" [(ngModel)]="detalle.vuelto" readonly>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+    <div mat-dialog-actions>
+        <button mat-button type="submit" class="btn btn-info btn-fill pull-right" (click)='onClickNO()'>Cancelar</button>
+        <button mat-button type="submit" class="btn btn-danger btn-fill pull-right" (click)='clickSi()'>Terminar compra</button>
+        
+    </div>
