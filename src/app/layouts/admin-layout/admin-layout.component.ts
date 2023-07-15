@@ -2,7 +2,9 @@ import { Component, OnInit} from '@angular/core';
 import { Location, PopStateEvent } from '@angular/common';
 import { Router, NavigationEnd, NavigationStart } from '@angular/router';
 import PerfectScrollbar from 'perfect-scrollbar';
-import { filter, Subscription } from 'rxjs';
+import { filter } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
+
 
 @Component({
   selector: 'app-admin-layout',
@@ -11,7 +13,7 @@ import { filter, Subscription } from 'rxjs';
 })
 export class AdminLayoutComponent implements OnInit {
   private _router: Subscription;
-  private lastPoppedUrl: string;
+  private lastPoppedUrl: string | undefined;
   private yScrollStack: number[] = [];
 
   constructor( public location: Location, private router: Router) {}
@@ -33,21 +35,28 @@ export class AdminLayoutComponent implements OnInit {
       this.location.subscribe((ev:PopStateEvent) => {
           this.lastPoppedUrl = ev.url;
       });
-       this.router.events.subscribe((event:any) => {
-          if (event instanceof NavigationStart) {
-             if (event.url != this.lastPoppedUrl)
-                 this.yScrollStack.push(window.scrollY);
-         } else if (event instanceof NavigationEnd) {
-             if (event.url == this.lastPoppedUrl) {
-                 this.lastPoppedUrl = undefined;
-                 window.scrollTo(0, this.yScrollStack.pop());
-             } else
-                 window.scrollTo(0, 0);
-         }
+      this.router.events.subscribe((event: any) => {
+        if (event instanceof NavigationStart) {
+          if (event.url != this.lastPoppedUrl) {
+            this.yScrollStack.push(window.scrollY);
+          }
+        } else if (event instanceof NavigationEnd) {
+          if (event.url == this.lastPoppedUrl) {
+            this.lastPoppedUrl = undefined;
+            const yScroll = this.yScrollStack.pop();
+            if (typeof yScroll !== 'undefined') {
+              window.scrollTo(0, yScroll);
+            }
+          } else {
+            window.scrollTo(0, 0);
+          }
+        }
       });
-      this._router = this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe((event: NavigationEnd) => {
-           elemMainPanel.scrollTop = 0;
-           elemSidebar.scrollTop = 0;
+      this._router = this.router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe((event) => {
+        elemMainPanel.scrollTop = 0;
+        elemSidebar.scrollTop = 0;
       });
       if (window.matchMedia(`(min-width: 960px)`).matches && !this.isMac()) {
           let ps = new PerfectScrollbar(elemMainPanel);

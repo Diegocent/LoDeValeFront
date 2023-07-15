@@ -66,13 +66,13 @@ export class LbdChartComponent implements OnInit, AfterViewInit {
 
     switch (this.chartType) {
       case ChartType.Pie:
-        new Chartist.Pie(`#${this.chartId}`, this.chartData, this.chartOptions, this.chartResponsive);
+        new Chartist.LineChart(`#${this.chartId}`, this.chartData, this.chartOptions, this.chartResponsive);
         break;
       case ChartType.Line:
-        new Chartist.Line(`#${this.chartId}`, this.chartData, this.chartOptions, this.chartResponsive);
+        new Chartist.LineChart(`#${this.chartId}`, this.chartData, this.chartOptions, this.chartResponsive);
         break;
       case ChartType.Bar:
-        new Chartist.Bar(`#${this.chartId}`, this.chartData, this.chartOptions, this.chartResponsive);
+        new Chartist.LineChart(`#${this.chartId}`, this.chartData, this.chartOptions, this.chartResponsive);
         break;
     }
   }

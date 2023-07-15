@@ -3,8 +3,6 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { LbdModule } from '../../lbd/lbd.module';
-import { NguiMapModule} from '@ngui/map';
 
 import {MatTableModule} from '@angular/material/table';
 import {MatButtonModule} from '@angular/material/button';
@@ -16,7 +14,6 @@ import {MatRadioModule} from '@angular/material/radio';
 
 import { AdminLayoutRoutes } from './admin-layout.routing';
 
-import { HomeComponent } from '../../home/home.component';
 import { UserComponent } from '../../user/user.component';
 import { TablesComponent } from '../../tables/tables.component';
 import { TypographyComponent } from '../../typography/typography.component';
@@ -36,8 +33,6 @@ import { VistaPlatosComponent } from 'app/vista-platos/vista-platos.component';
     CommonModule,
     RouterModule.forChild(AdminLayoutRoutes),
     FormsModule,
-    LbdModule,
-    NguiMapModule.forRoot({apiUrl: 'https://maps.google.com/maps/api/js?key=YOUR_KEY_HERE'}),
     MatCheckboxModule,
     MatTableModule,
     MatButtonModule,
@@ -47,7 +42,6 @@ import { VistaPlatosComponent } from 'app/vista-platos/vista-platos.component';
     MatRadioModule
   ],
   declarations: [
-    HomeComponent,
     UserComponent,
     TablesComponent,
     TypographyComponent,
@@ -59,11 +53,6 @@ import { VistaPlatosComponent } from 'app/vista-platos/vista-platos.component';
     CargarProductoComponent,
     VistaPlatosComponent
   ],
-  entryComponents: [
-    HeroDetailComponent,
-    CargarProductoComponent,
-    VistaPlatosComponent
-  ]
 })
 
 export class AdminLayoutModule {}

@@ -34,8 +34,8 @@ export class TypographyComponent implements OnInit {
   dataSource: Venta[] = []
   displayedColumns: string[] = [ 'fecha', 'monto', 'usuario','cliente','detalle']
   total:number = 0;
-  fecha_inicio:Date= new Date();
-  fecha_fin:Date= new Date();
+  fecha_inicio:Date | undefined = new Date();
+  fecha_fin:Date | undefined = new Date();
   
 constructor(
   private ventaService: VentaService,

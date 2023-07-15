@@ -18,8 +18,8 @@ export class VistaPlatosComponent implements OnInit {
 
   seleccionado:Producto;
 
-  peso:number;
-  total:number;
+  peso!:number;
+  total!:number;
 
   constructor(
     public dialogRef: MatDialogRef<VistaPlatosComponent>,
@@ -41,7 +41,7 @@ export class VistaPlatosComponent implements OnInit {
       console.log(this.total);
     }else{
       this.showNotification();
-      this.peso=null;
+      this.peso!=null;
     }
   }
 

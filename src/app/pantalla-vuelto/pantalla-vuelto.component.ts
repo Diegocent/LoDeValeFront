@@ -1,10 +1,9 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { texttospeech } from 'googleapis/build/src/apis/texttospeech';
 
 declare interface Vuelto {
- vuelto:number;
- efectivo:number;
+ vuelto:number | null;
+ efectivo:number | null;
 }
 
 @Component({
@@ -28,7 +27,8 @@ export class PantallaVueltoComponent implements OnInit {
     this.dialogRef.close(this.detalle);
   }
   calcularVuelto(event){
-    this.detalle.vuelto=this.detalle.efectivo-this.total;
+    let valor: number =this.detalle.efectivo ??0;
+    this.detalle.vuelto=valor-this.total;
     console.log(this.detalle.vuelto)
   }
 

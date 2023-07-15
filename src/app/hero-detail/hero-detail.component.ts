@@ -32,7 +32,7 @@ declare interface DatosTabla{
   id:number;
   nombre_producto:string;
   precio_compra:number;
-  cantidad:number;
+  cantidad:number | null;
   id_producto:number;
 }
 @Component({
@@ -156,7 +156,8 @@ export class HeroDetailComponent implements OnInit {
     var mm = today.getMonth() + 1;
     var yyyy = today.getFullYear();
     this.dataSource.forEach(element=>{
-      variable = element.cantidad*element.precio_compra;
+      let valor: number =element.cantidad ??0;
+      variable = valor*element.precio_compra;
       total=total+variable;
     })
     if(total!=0){
@@ -168,7 +169,7 @@ export class HeroDetailComponent implements OnInit {
         console.log(res);
         this.dataSource.forEach(element => {
           if(element.cantidad!=0){
-          var temp = element.cantidad*element.precio_compra;
+          var temp = (element.cantidad??0)*element.precio_compra;
             this.descripcionCompraService.create({
                 monto_unitario:element.precio_compra,
                 cantidad:element.cantidad,
@@ -180,12 +181,12 @@ export class HeroDetailComponent implements OnInit {
             });
           }
         });
-        
+      //usando ?? puedo hacer que un numero si es null setee a 0
         let conf:number;
         this.datos.forEach((element,index)=>{
           console.log(this.dataSource[index].precio_compra,typeof(this.dataSource[index].precio_compra))
           let n1= element.cantidad;
-          let n2=this.dataSource[index].cantidad;
+          let n2=this.dataSource[index].cantidad ??0;
           conf = +n1 + +n2;
           console.log(conf);
           let datos={
