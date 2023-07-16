@@ -12,9 +12,19 @@ declare interface Usuario{
   providedIn: 'root'
 })
 export class UsuarioService {
-  usuario:Usuario;
+  defecto: Usuario ={
+    id:0,
+    cedula:"0",
+    nombre:"0",
+    apellido:"0",
+    contraseña:"0",
+    CajaId:0
+  }
+  usuario:Usuario = this.defecto;
   total:number = 0;
-  constructor() { }
+  
+  constructor() {
+   }
   anadirCliente(user: Usuario) {
     this.usuario = user;
   }
@@ -27,5 +37,8 @@ export class UsuarioService {
   }
   obtenerTotal(){
     return this.total;
+  }
+  cerrarSesion(){
+    this.usuario = this.defecto;
   }
 }

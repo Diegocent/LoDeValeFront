@@ -37,7 +37,7 @@ export class VistaPlatosComponent implements OnInit {
   calcularCosto(event){
     if(this.seleccionado!=null){
       console.log(this.seleccionado);
-      this.total = this.peso*this.seleccionado.precio_por_kilo;
+      this.total = Math.floor(this.peso*this.seleccionado.precio_por_kilo);
       console.log(this.total);
     }else{
       this.showNotification();
@@ -47,14 +47,18 @@ export class VistaPlatosComponent implements OnInit {
 
   guardarPlato(){
     if(this.seleccionado!=null){
-      var dato = {
-        id: this.seleccionado.id,
-        nombre: this.seleccionado.nombre,
-        precio_kilo: this.seleccionado.precio_por_kilo,
-        peso: this.peso,
-        precio: this.total
+      if(this.peso != null){
+        var dato = {
+          id: this.seleccionado.id,
+          nombre: this.seleccionado.nombre,
+          precio_kilo: this.seleccionado.precio_por_kilo,
+          peso: this.peso,
+          precio: this.total
+        }
+        this.dialogRef.close(dato);
+      }else {
+        alert("Debe ingresar un peso")
       }
-      this.dialogRef.close(dato);
 
     }else{
       this.showNotification();

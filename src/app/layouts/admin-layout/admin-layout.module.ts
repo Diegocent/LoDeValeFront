@@ -11,6 +11,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatSelectModule} from '@angular/material/select';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatRadioModule} from '@angular/material/radio';
+import { MatSortModule } from '@angular/material/sort';
 
 import { AdminLayoutRoutes } from './admin-layout.routing';
 
@@ -39,7 +40,8 @@ import { VistaPlatosComponent } from 'app/vista-platos/vista-platos.component';
     MatDialogModule,
     MatSelectModule,
     MatPaginatorModule,
-    MatRadioModule
+    MatRadioModule,
+    MatSortModule
   ],
   declarations: [
     UserComponent,

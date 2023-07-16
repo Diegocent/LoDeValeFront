@@ -4,6 +4,7 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { CargarProductoComponent } from '../cargar-producto/cargar-producto.component';
+import { MatSort } from '@angular/material/sort';
 declare var $:any;
 
 declare interface Producto {
@@ -27,10 +28,10 @@ export class NotificationsComponent implements OnInit{
   consulta:boolean=true;
   registro:Producto[]=[];
 
-  dataSource: any;
+  dataSource: MatTableDataSource<any>;
   displayedColumns: string[] = [ 'cantidad', 'nombre_producto', 'precio_venta','codigo_barras','eliminar']
   @ViewChild(MatPaginator) paginator: MatPaginator;
-
+  @ViewChild(MatSort) sort: MatSort;
   constructor(
     private productoService: ProductosService,
     public dialog: MatDialog,
@@ -47,6 +48,7 @@ export class NotificationsComponent implements OnInit{
     this.productoService.getAll().subscribe(res => {
     this.dataSource = new MatTableDataSource<Producto>(res);
     this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
     console.log(this.dataSource);
     })
   }

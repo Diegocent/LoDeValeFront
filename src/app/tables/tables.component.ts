@@ -85,7 +85,7 @@ export class TablesComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    if(this.usuarioService.obtenerCliente()==undefined){
+    if(this.usuarioService.obtenerCliente().CajaId==0){
       // this.ver=true;
       this.router.navigate(['/login'])
     }else{
@@ -98,8 +98,8 @@ export class TablesComponent implements OnInit {
   actualizar(){
     this.productosService.getAll().subscribe(respuesta =>{
       this.usuario=this.usuarioService.obtenerCliente();
-      this.id_user=this.usuario[0].id;
-      console.log('el ide del cajero es el siguiente',this.usuario[0].id)
+      this.id_user=this.usuario.id;
+      console.log('el ide del cajero es el siguiente',this.usuario.id)
     });
   }    
     
@@ -206,6 +206,10 @@ export class TablesComponent implements OnInit {
   buscarProducto(event,text){
     this.productosService.buscar(this.codigo).subscribe(res=>{
       console.log(res);
+
+      if ( res[0].cantidad < this.cantidad){
+        alert("No se cuenta con la cantidad suficiente del producto");
+      }else{
       let subtotal: number;
       
 
@@ -229,7 +233,7 @@ export class TablesComponent implements OnInit {
   this.cantidad = 1;
   this.codigo= '';
   text.focus();
-
+    }
 
   })
   }
@@ -301,9 +305,9 @@ export class TablesComponent implements OnInit {
         doc.text("     CASI PAZ DEL CHACO",1,15)
         doc.text("================================",1,20)
         doc.text("Fecha:"+dia+"Hora:"+hora,1,25)
-        doc.text("Caja: "+this.usuario[0].CajaId,1,30)
+        doc.text("Caja: "+this.usuario.CajaId,1,30)
         doc.text("Cliente:  "+this.nombre,1,35)
-        doc.text("Vendedor:"+this.usuario[0].nombre+' '+this.usuario[0].apellido,1,40)
+        doc.text("Vendedor:"+this.usuario.nombre+' '+this.usuario.apellido,1,40)
         doc.text("================================",1,45)
         doc.text("Cant. Producto        SubTotal ",1,50)
         var i:number= 55;
@@ -332,6 +336,7 @@ export class TablesComponent implements OnInit {
     //   ],
     // })
     doc.autoPrint();
-    doc.output('dataurlnewwindow', {filename: 'comprobante.pdf'});    
+    //doc.output('dataurlnewwindow', {filename: 'comprobante.pdf'});
+    //window.open(doc.output('bloburl'), '_blank');
       }
 }

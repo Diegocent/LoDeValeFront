@@ -6,7 +6,7 @@
                 <div class="card">
                     <div class="header">
                           <!-- desde aqui se edita-->
-                        <h3 class="title">Nuevo Producto</h3>
+                        <h3 class="title">Productos</h3>
                                     
                         <div class="row">
                             <div class="col-md-4">
@@ -25,24 +25,24 @@
                        <!-- fin de edicion -->
                     </div>
                     <div class="content table-responsive table-full-width">
-                        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 table table-hover table-striped">         
+                        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 table table-hover table-striped" matSort>         
                             <ng-container matColumnDef="cantidad">
-                              <th mat-header-cell *matHeaderCellDef> cantidad </th>
+                              <th mat-header-cell *matHeaderCellDef mat-sort-header> Cantidad </th>
                               <td mat-cell *matCellDef="let element"> {{element.cantidad}} </td>
                             </ng-container>
                           
                             <ng-container matColumnDef="nombre_producto">
-                              <th mat-header-cell *matHeaderCellDef> nombre </th>
+                              <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
                               <td mat-cell *matCellDef="let element"> <input type="text" class="form-control" placeholder="nombre" [(ngModel)]="element.nombre" [disabled]="consulta"></td>
                             </ng-container>
           
                             <ng-container matColumnDef="precio_venta">
-                              <th mat-header-cell *matHeaderCellDef> precio_venta </th>
+                              <th mat-header-cell *matHeaderCellDef mat-sort-header> Precio de venta </th>
                               <td mat-cell *matCellDef="let element"> <input type="number" class="form-control" placeholder="precio_venta" [(ngModel)]="element.precio_venta" [disabled]="consulta" (change)="cargarValor($event,element)"></td>
                             </ng-container>
                           
                             <ng-container matColumnDef="codigo_barras">
-                              <th mat-header-cell *matHeaderCellDef> codigo_barras </th>
+                              <th mat-header-cell *matHeaderCellDef mat-sort-header> Codigo de barras </th>
                               <td mat-cell *matCellDef="let element"> <input type="text" class="form-control" placeholder="codigo_barras" [(ngModel)]="element.codigo_barras" [disabled]="consulta" (change)="cargarValor($event,element)"></td>
                             </ng-container>
                             

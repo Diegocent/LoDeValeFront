@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-
+import { MatSortModule } from '@angular/material/sort';
 import {MatTableModule} from '@angular/material/table';
 import { AppRoutingModule } from './app.routing';
 import { NavbarModule } from './shared/navbar/navbar.module';
@@ -31,7 +31,8 @@ import { LoginComponent } from './login/login.component';
     FooterModule,
     SidebarModule,
     AppRoutingModule,
-    MatTableModule
+    MatTableModule,
+    MatSortModule
   ],
   declarations: [
     AppComponent,

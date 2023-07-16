@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewChild } from '@angular/core';
 import { DescripcionVentaService } from 'app/service/descripcion-venta.service';
-import { VentaService } from 'app/service/venta.service'
+import { VentaService } from 'app/service/venta.service';
+import {MatTableDataSource} from '@angular/material/table';
+import { MatSort } from '@angular/material/sort';
+import {MatPaginator} from '@angular/material/paginator';
 
 declare interface Cliente{
   id:number,
@@ -31,11 +34,14 @@ declare interface Venta {
   styleUrls: ['./typography.component.css']
 })
 export class TypographyComponent implements OnInit {
-  dataSource: Venta[] = []
+  temp: Venta[] = []
+  dataSource: MatTableDataSource<any>;
   displayedColumns: string[] = [ 'fecha', 'monto', 'usuario','cliente','detalle']
   total:number = 0;
   fecha_inicio:Date | undefined = new Date();
   fecha_fin:Date | undefined = new Date();
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
   
 constructor(
   private ventaService: VentaService,
@@ -56,7 +62,7 @@ ngOnInit() {
 
 actualizar(dia){
   this.ventaService.filtrar(dia,dia).subscribe(res => {
-    this.dataSource=[];
+    this.temp=[];
     this.total=0;
     res.forEach(element=>{
       var fecha = new Date(element.fecha)
@@ -69,7 +75,10 @@ actualizar(dia){
         usuario:element.Usuario,
         cliente:element.Cliente
       }
-      this.dataSource=[...this.dataSource,dato]
+      this.temp=[...this.temp,dato]
+      this.dataSource = new MatTableDataSource<Venta>(this.temp);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
       this.fecha_fin=undefined;
       this.fecha_inicio=undefined;
     })
@@ -80,7 +89,7 @@ actualizar(dia){
 filtrar(){
   if(this.fecha_inicio!=undefined && this.fecha_fin!=undefined){
     this.ventaService.filtrar(this.fecha_inicio,this.fecha_fin).subscribe(res=>{
-      this.dataSource=[];
+      this.temp=[];
       this.total=0;
       res.forEach(element=>{
         var fecha = new Date(element.fecha)
@@ -93,7 +102,10 @@ filtrar(){
           usuario:element.Usuario,
           cliente:element.Cliente
         }
-        this.dataSource=[...this.dataSource,dato]
+        this.temp=[...this.temp,dato]
+        this.dataSource = new MatTableDataSource<Venta>(this.temp);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
         this.fecha_fin=undefined;
         this.fecha_inicio=undefined;
       })
