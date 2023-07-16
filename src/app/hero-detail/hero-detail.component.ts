@@ -45,7 +45,7 @@ export class HeroDetailComponent implements OnInit {
   cant:number;
   nombre_proveedor:string;
   dataSource: DatosTabla[] = []
-  displayedColumns: string[] = ['nombre_producto', 'precio_compra','cantidad']
+  displayedColumns: string[] = ['nombre_producto', 'precio_compra','cantidad','eliminar']
   registro:DatosTabla[] = []
   productos:Producto[]=[]
 
@@ -134,6 +134,7 @@ export class HeroDetailComponent implements OnInit {
             precio_compra:this.registro[index].precio_compra,
           }
           this.descripcionProveedorService.update(this.registro[index].id,dt).subscribe(res=>{
+            this.actualizar();
             console.log(res)
           })
         
@@ -141,6 +142,15 @@ export class HeroDetailComponent implements OnInit {
     }
       this.activarCeldas();
       this.actualizar();
+  }
+
+  eliminarProducto(id :number){
+    if(confirm("Esta seguro que desea eliminar este producto?")){
+      this.descripcionProveedorService.delete(id).subscribe(res=>{
+        this.actualizar();
+        console.log(res)
+      })
+    }
   }
 
   cancelarCarga(){
@@ -194,6 +204,7 @@ export class HeroDetailComponent implements OnInit {
           }
           if(conf!=n1){
           this.productosService.update(element.id,datos).subscribe(res=>{
+            this.actualizar();
             console.log(res)
           })
           }

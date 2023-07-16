@@ -24,7 +24,7 @@ export class PopupProveedorComponent implements OnInit {
   }
 
   guardarProveedor(){
-    if(this.documento!='nul' && this.empresa!=''){
+    if(this.documento!='null' && this.empresa!=''){
       let dato = {
         ruc:  this.documento,
         empresa: this.empresa

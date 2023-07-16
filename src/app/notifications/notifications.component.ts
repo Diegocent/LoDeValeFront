@@ -28,7 +28,7 @@ export class NotificationsComponent implements OnInit{
   registro:Producto[]=[];
 
   dataSource: any;
-  displayedColumns: string[] = [ 'cantidad', 'nombre_producto', 'precio_venta','codigo_barras']
+  displayedColumns: string[] = [ 'cantidad', 'nombre_producto', 'precio_venta','codigo_barras','eliminar']
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(
@@ -129,6 +129,16 @@ export class NotificationsComponent implements OnInit{
       
 
   }
+
+  eliminarProducto(id :number){
+    if(confirm("Esta seguro que desea eliminar este producto?")){
+      this.productoService.delete(id).subscribe(res=>{
+        this.actualizar();
+        console.log(res)
+      })
+    }
+  }
+
   cancelar(){
     this.cambiarValor();
     this.actualizar();

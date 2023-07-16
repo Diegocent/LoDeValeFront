@@ -4,7 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 @Component({
   selector: 'app-ventana-confirmacion',
   templateUrl: './ventana-confirmacion.component.html',
-  styleUrls: ['./ventana-confirmacion.component.scss']
+  styleUrls: ['./ventana-confirmacion.component.css']
 })
 export class VentanaConfirmacionComponent implements OnInit {
 

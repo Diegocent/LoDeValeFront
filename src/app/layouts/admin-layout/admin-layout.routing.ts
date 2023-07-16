@@ -13,7 +13,7 @@ import { LoginComponent } from 'app/login/login.component';
 export const AdminLayoutRoutes: Routes = [
     { path: 'table',          component: TablesComponent },
     { path: 'typography',     component: TypographyComponent },
-    { path: 'icons',          component: IconsComponent },
+    // { path: 'icons',          component: IconsComponent },
     { path: 'maps',           component: MapsComponent },
     { path: 'notifications',  component: NotificationsComponent },
     {
