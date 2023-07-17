@@ -80,12 +80,24 @@ export class LoginComponent implements OnInit {
       "cajero: ",this.cajero.id
     )
     if(this.deja_en_caja <= this.ingreso){
+      var today = new Date();
+      var dd = today.getDate();
+
+      var mm = today.getMonth() + 1;
+      var yyyy = today.getFullYear();
+      var dia = yyyy + '/' + mm + '/' +dd;
+      // var dia= dd + '/'+mm+'/'+yyyy;
+      var hour = today.getHours();
+      var minute = today.getMinutes();
+      var second = today.getSeconds();
+      var hora = hour+':'+minute+':'+second;
       this.cierreService.create(
         {
           UsuarioId: this.cajero.id,
           monto_parcial: monto_parcial,
           monto_final: this.ingreso,
-          en_caja: this.deja_en_caja
+          en_caja: this.deja_en_caja,
+          fecha: dia + ' ' + hora
         }
       ).subscribe(
         res => {

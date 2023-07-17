@@ -25,6 +25,12 @@ export const ROUTES: RouteInfo[] = [
     icon: "pe-7s-users",
     class: "",
   },
+  {
+    path: "/reporte-cierre",
+    title: "Cierres de caja",
+    icon: "fa fa-money ",
+    class: "",
+  }
 ];
 
 @Component({

@@ -1,0 +1,80 @@
+
+<div class="main-content">
+    <div class="container-fluid">
+
+        <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="header">
+                        <h3 class="title">Reporte Cierre</h3>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Fecha desde</label>
+                                    <input type="date" style='-moz-appearance:textfield;' class="form-control" placeholder="" [(ngModel)]="fecha_inicio">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Fecha hasta</label>
+                                    <input type="date" style='-moz-appearance:textfield;' class="form-control" placeholder="" [(ngModel)]="fecha_fin">
+                                </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-info btn-fill pull-right" (click)="filtrar()">Filtrar</button>
+                            </div>
+                    </div>
+                        </div>
+                    <div class="content table-responsive table-full-width">
+                        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 table table-hover table-striped" matSort>         
+                            <ng-container matColumnDef="usuario">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Cajero </th>
+                                <td mat-cell *matCellDef="let element"> {{element.usuario}}</td>
+                              </ng-container>
+
+                            <ng-container matColumnDef="total_ingresado">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Total Ingresado </th>
+                                <td mat-cell *matCellDef="let element"> {{element.monto_final}} </td>
+                            </ng-container>
+                            
+                            <ng-container matColumnDef="total_caja">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Total en Caja </th>
+                                <td mat-cell *matCellDef="let element"> {{element.en_caja}} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="diferencia">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Diferencia </th>
+                                <td mat-cell *matCellDef="let element"> {{element.monto_parcial}} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="fecha">
+                              <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha </th>
+                              <td mat-cell *matCellDef="let element"> {{element.fecha}} </td>
+                            </ng-container>
+                            
+                            <ng-container matColumnDef="hora">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Hora </th>
+                                <td mat-cell *matCellDef="let element"> {{element.hora}} </td>
+                            </ng-container>
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        </table>
+                        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Selecciona la pagina del reporte">  </mat-paginator>
+                    </div>
+                </div>
+                
+            </div>
+            <!-- <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Total en la fecha seleccionada</label>
+                        <input type="number" style='-moz-appearance:textfield;' class="form-control" placeholder="" [(ngModel)]="total" readonly>
+                    </div>
+                </div>
+            </div> -->
+        </div>
+    </div>
+    </div>
+</div>

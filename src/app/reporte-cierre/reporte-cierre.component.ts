@@ -1,16 +1,10 @@
-import { Component, OnInit,ViewChild } from '@angular/core';
-import { DescripcionVentaService } from 'app/service/descripcion-venta.service';
-import { VentaService } from 'app/service/venta.service';
+import { Component, OnInit,ViewChild } from '@angular/core';  
 import {MatTableDataSource} from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import {MatPaginator} from '@angular/material/paginator';
+import { DatePipe } from '@angular/common';
+import { CierreService } from 'app/service/cierre.service';
 
-declare interface Cliente{
-  id:number,
-  cedula: string,
-  nombre: string,
-  apellido: string,
-}
 declare interface Usuario{
   id:number,
   cedula: string,
@@ -19,24 +13,35 @@ declare interface Usuario{
   CajaId:number
 }
 
-declare interface Venta {
-  id: number;
-  fecha:string;
-  monto:number;
-  usuario:Usuario;
-  cliente:Cliente;
+// declare interface Cierre{
+//   id: number,
+//   usuario: Usuario,
+//   monto_parcial: number,
+//   monto_final: number,
+//   en_caja: number,
+//   createAt: Date
+// }
 
+declare interface Tabla{
+  id: number,
+  usuario: String,
+  monto_parcial: number,
+  monto_final: number,
+  en_caja: number,
+  fecha: String,
+  hora : String
 }
 
+
 @Component({
-  selector: 'app-typography',
-  templateUrl: './typography.component.html',
-  styleUrls: ['./typography.component.css']
+  selector: 'app-reporte-cierre',
+  templateUrl: './reporte-cierre.component.html',
+  styleUrls: ['./reporte-cierre.component.scss']
 })
-export class TypographyComponent implements OnInit {
-  temp: Venta[] = []
+export class ReporteCierreComponent implements OnInit {
+  temp: Tabla[] = []
   dataSource: MatTableDataSource<any>;
-  displayedColumns: string[] = [ 'fecha', 'monto', 'usuario','cliente','detalle']
+  displayedColumns: string[] = [ 'usuario', 'total_ingresado', 'total_caja','diferencia','fecha', 'hora']
   total:number = 0;
   fecha_inicio:Date | undefined = new Date();
   fecha_fin:Date | undefined = new Date();
@@ -44,9 +49,7 @@ export class TypographyComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   
 constructor(
-  private ventaService: VentaService,
-  private descripcionVentaService: DescripcionVentaService
-
+  private cierreService:CierreService
 ) { }
 
 ngOnInit() {
@@ -61,7 +64,7 @@ ngOnInit() {
 }
 
 actualizar(dia){
-  this.ventaService.filtrar(dia,dia).subscribe(res => {
+  this.cierreService.filtrar(dia,dia).subscribe(res => {
     this.temp=[];
     this.total=0;
     res.forEach(element=>{
@@ -70,13 +73,15 @@ actualizar(dia){
       var mes = fecha.getMonth()+1
       var dato = {
         id:element.id,
+        usuario: element.Usuario.nombre + " " + element.Usuario.apellido,
+        monto_parcial: element.monto_parcial,
+        monto_final: element.monto_final,
+        en_caja: element.en_caja,
         fecha: fecha.getDate()+'/'+mes+'/'+fecha.getFullYear(),
-        monto: element.monto,
-        usuario:element.Usuario,
-        cliente:element.Cliente
+        hora : fecha.getHours() + ':' + fecha.getMinutes() 
       }
       this.temp=[...this.temp,dato]
-      this.dataSource = new MatTableDataSource<Venta>(this.temp);
+      this.dataSource = new MatTableDataSource<Tabla>(this.temp);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
       this.fecha_fin=undefined;
@@ -88,7 +93,7 @@ actualizar(dia){
 
 filtrar(){
   if(this.fecha_inicio!=undefined && this.fecha_fin!=undefined){
-    this.ventaService.filtrar(this.fecha_inicio,this.fecha_fin).subscribe(res=>{
+    this.cierreService.filtrar(this.fecha_inicio,this.fecha_fin).subscribe(res=>{
       this.temp=[];
       this.total=0;
       res.forEach(element=>{
@@ -97,20 +102,22 @@ filtrar(){
         var mes = fecha.getMonth()+1
         var dato = {
           id:element.id,
+          usuario: element.Usuario.nombre + " " + element.Usuario.apellido,
+          monto_parcial: element.monto_parcial,
+          monto_final: element.monto_final,
+          en_caja: element.en_caja,
           fecha: fecha.getDate()+'/'+mes+'/'+fecha.getFullYear(),
-          monto: element.monto,
-          usuario:element.Usuario,
-          cliente:element.Cliente
+          hora : fecha.getHours() + ':' + fecha.getMinutes() 
         }
         this.temp=[...this.temp,dato]
-        this.dataSource = new MatTableDataSource<Venta>(this.temp);
+        this.dataSource = new MatTableDataSource<Tabla>(this.temp);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
         this.fecha_fin=undefined;
         this.fecha_inicio=undefined;
       })
       if (res.length == 0){
-        this.dataSource = new MatTableDataSource<Venta>([]);
+        this.dataSource = new MatTableDataSource<Tabla>([]);
       }
       console.log('el registro es',res,'para las fechas',this.fecha_fin,this.fecha_inicio);
     })
@@ -124,10 +131,6 @@ filtrar(){
     this.actualizar(dia);
   }
 
-}
-
-verDetalle(dato){
-    // this.descripcionVentaService.getAll()
 }
 
 }

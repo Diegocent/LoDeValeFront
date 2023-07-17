@@ -9,6 +9,7 @@ import { NotificationsComponent } from '../../notifications/notifications.compon
 import { UpgradeComponent } from '../../upgrade/upgrade.component';
 import { HeroDetailComponent } from '../../hero-detail/hero-detail.component';
 import { LoginComponent } from 'app/login/login.component';
+import { ReporteCierreComponent } from 'app/reporte-cierre/reporte-cierre.component';
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'table',          component: TablesComponent },
@@ -20,4 +21,8 @@ export const AdminLayoutRoutes: Routes = [
         path: 'login',
         component: LoginComponent,
       },
+    {
+      path:'reporte-cierre',
+      component: ReporteCierreComponent
+    }
 ];

@@ -26,7 +26,7 @@ import { UpgradeComponent } from '../../upgrade/upgrade.component';
 import { HeroDetailComponent } from '../../hero-detail/hero-detail.component';
 import { CargarProductoComponent } from '../../cargar-producto/cargar-producto.component';
 import { VistaPlatosComponent } from 'app/vista-platos/vista-platos.component';
-
+import { ReporteCierreComponent } from '../../reporte-cierre/reporte-cierre.component';
 
 
 @NgModule({
@@ -53,7 +53,8 @@ import { VistaPlatosComponent } from 'app/vista-platos/vista-platos.component';
     UpgradeComponent,
     HeroDetailComponent,
     CargarProductoComponent,
-    VistaPlatosComponent
+    VistaPlatosComponent,
+    ReporteCierreComponent
   ],
 })
 

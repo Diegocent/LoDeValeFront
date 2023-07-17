@@ -28,5 +28,8 @@ export class CierreService {
   update(id, data): Observable<any> {
     return this.http.put(`${baseUrl}/${id}`, data);
   }
+  filtrar(fecha1,fecha2): Observable<any> {
+    return this.http.get(`${baseUrl}/?FechaInicio=${fecha1} 00:00:00.000&FechaFin=${fecha2} 23:59:00.000`);
+  }
 
 }
