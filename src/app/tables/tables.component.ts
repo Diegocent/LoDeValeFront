@@ -286,7 +286,6 @@ export class TablesComponent implements OnInit {
       unit: 'mm',
       format: [58, 210]
   }) as jsPDFWithPlugin;
-    // var vector = [{nombre:'hola',dato:1,cantidad:15},{nombre:'hola',dato:1,cantidad:15},{nombre:'hola',dato:1,cantidad:15}]
     var today = new Date();
     var dd = today.getDate();
 
@@ -327,16 +326,8 @@ export class TablesComponent implements OnInit {
         doc.text("================================",1,j+30)
         doc.setFontSize(11)
         doc.text("Muchas gracias por su compra",1,j+35)
-    // doc.autoTable({
-    //   head: [['Name', 'Email', 'Country']],
-    //   body: [
-    //     ['David', 'david@example.com', 'Sweden'],
-    //     ['Castille', 'castille@example.com', 'Spain'],
-    //     // ...
-    //   ],
-    // })
     doc.autoPrint();
-    //doc.output('dataurlnewwindow', {filename: 'comprobante.pdf'});
+    doc.output('dataurlnewwindow', {filename: 'comprobante.pdf'});
     //window.open(doc.output('bloburl'), '_blank');
       }
 }
